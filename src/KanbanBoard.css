@@ -1,13 +1,16 @@
 /* KanbanBoard.css */
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz@6..12&display=swap');
+
 .kanban-board {
-    padding: 20px 0;
     font-size: small;
     font-family: 'Nunito Sans', sans-serif;
+    background-color: #d4d4d453;
   }
   
   .group-by {
     margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
   }
   .group-by label{
     margin-right: 30px;
@@ -16,12 +19,12 @@
     padding: 3px 20px 3px 1px;
     font-weight: 500;
   }
-  
+
   .ticket-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    background-color: #f5efefa0;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 20px;
+    padding: 10px;
   }
   
   .column {

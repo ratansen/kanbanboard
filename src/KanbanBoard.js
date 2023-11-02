@@ -8,16 +8,16 @@ import Ticket from './components/Ticket';
 const KanbanBoard = () => {
     const [groupBy, setGroupBy] = useState(() => {
         return localStorage.getItem('selectedGroupBy') || 'userId';
-      });
+    });
     const [tickets, setTickets] = useState([]);
     const [users, setUsers] = useState([]);
 
     const handleGroupByChange = (e) => {
         const selectedGroupBy = e.target.value;
         setGroupBy(selectedGroupBy);
-    
+
         localStorage.setItem('selectedGroupBy', selectedGroupBy);
-      };
+    };
 
     useEffect(() => {
         fetchData()
@@ -72,31 +72,35 @@ const KanbanBoard = () => {
 
 
     return (
-        <div className="kanban-board">
-            <div className="group-by">
-                <label>Grouping  </label>
-                <select value={groupBy} onChange={handleGroupByChange}>
-                    <option value="userId">User</option>
-                    <option value="priority">Priority</option>
-                    <option value="status">Status</option>
-                </select>
-            </div>
+        <div className='wrapper'>
 
-            <div className="ticket-container">
-                {Object.keys(groupedData).map((group) => (
-                    <div key={group} className="column">
+            <div className="kanban-board">
+                <div className="group-by">
+                    <label>Grouping  </label>
+                    <select value={groupBy} onChange={handleGroupByChange}>
+                        <option value="userId">User</option>
+                        <option value="priority">Priority</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
 
-                        <div className='group-head'> {groupBy === "priority" ? priorityMap[group] : groupBy === "userId" ? userMap[group] : group}
-                            <span className='count'>{groupedData[group].length}</span>
+                <div className="ticket-container">
+                    {Object.keys(groupedData).map((group) => (
+                        <div key={group} className="column">
+
+                            <div className='group-head'> {groupBy === "priority" ? priorityMap[group] : groupBy === "userId" ? userMap[group] : group}
+                                <span className='count'>{groupedData[group].length}</span>
+                            </div>
+                            {groupedData[group].map((item) => (
+                                <Ticket key={item.name} ticket={item} groupBy={groupBy} />
+                            ))
+                            }
                         </div>
-                        {groupedData[group].map((item) => (
-                            <Ticket key={item.name} ticket={item} groupBy={groupBy} />
-                        ))
-                        }
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
+
     );
 };
 
